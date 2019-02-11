@@ -1,0 +1,15 @@
+type Movie {
+	id: ID!,
+	yearOfRelease: Long!,
+	collection: Float!
+	language: String!
+	name: String!
+}
+
+extend type Query {
+	findAllMovies: [Movie]!
+}
+
+extend type Mutation {
+	newMovie(yearOfRelease: Long!, collection: Float!, language: String!, name: String!) : Movie!
+}

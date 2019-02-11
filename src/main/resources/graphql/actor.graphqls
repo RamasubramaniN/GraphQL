@@ -1,0 +1,13 @@
+type Actor {
+	id: ID!
+	name: String!
+	age:	 Int!
+}
+
+type Query {
+	findAllActors: [Actor]!
+}
+
+type Mutation {
+	newActor(name: String!, age: Int!) : Actor!
+}
