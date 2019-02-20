@@ -10,4 +10,5 @@ type Query {
 
 type Mutation {
 	newActor(name: String!, age: Int!) : Actor!
+	deleteActor(name: String!) : Boolean
 }

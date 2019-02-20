@@ -10,7 +10,7 @@ import com.psg.ramasubramani.repository.MovieRepository;
 
 /**
  * @author rn5
- *
+ * Use GraphiQL tool to test APIs.
  */
 @Component
 public class Query implements GraphQLQueryResolver {
@@ -23,10 +23,36 @@ public class Query implements GraphQLQueryResolver {
         this.actorRepository = actorRepository;
     }
 
+    /**
+        Url : http://localhost:8080/graphql
+      
+        Request :
+        {
+          findAllMovies {
+            id
+            name
+            language
+            yearOfRelease
+            collection
+          }
+        }
+    */
     public Iterable<Movie> findAllMovies() {
         return movieRepository.getAllMovies();
     }
 
+    /**
+        Url : http://localhost:8080/graphql
+      
+        Request :
+        {
+          findAllActors {
+            id
+            name
+            age
+          }
+        }
+    */
     public Iterable<Actor> findAllActors() {
         return actorRepository.getAllActors();
     }

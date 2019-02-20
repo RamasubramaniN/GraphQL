@@ -38,4 +38,8 @@ public class Movie {
         return name;
     }
 
+    public void setCollection(Float collection) {
+        this.collection = collection;
+    }
+    
 }
