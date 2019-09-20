@@ -1,0 +1,10 @@
+type Player {
+	id: ID!
+	name: String!
+	age: Int!
+	team: Team!
+}
+
+extend type Query {
+	findAllPlayers: [Player]!
+}

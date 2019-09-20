@@ -1,0 +1,9 @@
+type Team {
+	id: ID!
+	name: String!
+	players: [Player]!
+}
+
+extend type Query {
+	findAllTeams: [Team]!
+}
