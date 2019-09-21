@@ -98,12 +98,12 @@ public class Mutation implements GraphQLMutationResolver {
 		  }
 		}
      */
-    public Player newPlayer(String teamName, String playerName, Integer playerAge) {
-    		Integer nextPlayerId = this.playerRepository.maxId() + 1;
-    		Team team = this.teamRepository.getTeamByTeamName(teamName);
-    		if(team == null)
-    			throw new RuntimeException("Invalid Team Name");
-    		Player player = new Player(team, nextPlayerId.toString(), playerName, playerAge);
-    		return playerRepository.save(player);
-    }
+	public Player newPlayer(String teamName, String playerName, Integer playerAge) {
+		Integer nextPlayerId = this.playerRepository.maxId() + 1;
+		Team team = this.teamRepository.getTeamByTeamName(teamName);
+		if (team == null)
+			throw new RuntimeException("Invalid Team Name");
+		Player player = new Player(team, nextPlayerId.toString(), playerName, playerAge);
+		return playerRepository.save(player);
+	}
 }
