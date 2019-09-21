@@ -3,6 +3,7 @@ package com.psg.ramasubramani.mutation;
 import org.springframework.stereotype.Component;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.psg.ramasubramani.exception.InvalidTeamException;
 import com.psg.ramasubramani.model.Actor;
 import com.psg.ramasubramani.model.Movie;
 import com.psg.ramasubramani.model.Player;
@@ -102,7 +103,7 @@ public class Mutation implements GraphQLMutationResolver {
 		Integer nextPlayerId = this.playerRepository.maxId() + 1;
 		Team team = this.teamRepository.getTeamByTeamName(teamName);
 		if (team == null)
-			throw new RuntimeException("Invalid Team Name");
+			throw new InvalidTeamException("Invalid Team Name");
 		Player player = new Player(team, nextPlayerId.toString(), playerName, playerAge);
 		return playerRepository.save(player);
 	}
