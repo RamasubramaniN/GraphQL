@@ -5,8 +5,12 @@ import org.springframework.stereotype.Component;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.psg.ramasubramani.model.Actor;
 import com.psg.ramasubramani.model.Movie;
+import com.psg.ramasubramani.model.Player;
+import com.psg.ramasubramani.model.Team;
 import com.psg.ramasubramani.repository.ActorRepository;
 import com.psg.ramasubramani.repository.MovieRepository;
+import com.psg.ramasubramani.repository.PlayerRepository;
+import com.psg.ramasubramani.repository.TeamRepository;
 
 /**
  * @author rn5
@@ -17,10 +21,15 @@ public class Mutation implements GraphQLMutationResolver {
     
     private MovieRepository movieRepository;
     private ActorRepository actorRepository;
+    private PlayerRepository playerRepository;
+    private TeamRepository teamRepository;
 
-    public Mutation(MovieRepository movieRepository, ActorRepository actorRepository) {
+    public Mutation(MovieRepository movieRepository, ActorRepository actorRepository,
+    					PlayerRepository playerRepository, TeamRepository teamRepository) {
         this.movieRepository = movieRepository;
         this.actorRepository = actorRepository;
+        this.playerRepository = playerRepository;
+        this.teamRepository = teamRepository;
     }
 
     /**
@@ -76,5 +85,25 @@ public class Mutation implements GraphQLMutationResolver {
     */
     public Boolean updateMovieCollection(String name, String language, Float collection) {
         return movieRepository.updateMovieCollection(name, language, collection);
+    }
+    
+    /**
+     * Url : http://localhost:8080/graphql 
+     * POST Request
+     	mutation {
+		  newPlayer(teamName: "India", playerName: "Rahul Dravid", playerAge: 40) {
+		    id
+		    name
+		    age
+		  }
+		}
+     */
+    public Player newPlayer(String teamName, String playerName, Integer playerAge) {
+    		Integer nextPlayerId = this.playerRepository.maxId() + 1;
+    		Team team = this.teamRepository.getTeamByTeamName(teamName);
+    		if(team == null)
+    			throw new RuntimeException("Invalid Team Name");
+    		Player player = new Player(team, nextPlayerId.toString(), playerName, playerAge);
+    		return playerRepository.save(player);
     }
 }

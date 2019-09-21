@@ -8,3 +8,7 @@ type Player {
 extend type Query {
 	findAllPlayers: [Player]!
 }
+
+extend type Mutation {
+	newPlayer(teamName: String!, playerName: String!, playerAge: Int!) : Player!
+}

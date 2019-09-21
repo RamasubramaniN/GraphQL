@@ -25,6 +25,17 @@ public class Player {
 	private String name;
 	private Integer age;
 	
+	public Player() {
+		
+	}
+	
+	public Player(Team team, String id, String name, Integer age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.team = team;
+	}
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id")
 	private Team team;
