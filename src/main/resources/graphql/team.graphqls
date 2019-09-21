@@ -6,4 +6,5 @@ type Team {
 
 extend type Query {
 	findAllTeams: [Team]!
+	findTeamByTeamId(teamId: String!): Team!
 }

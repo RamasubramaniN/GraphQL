@@ -100,4 +100,23 @@ public class Query implements GraphQLQueryResolver {
 	public Iterable<Player> findAllPlayers() {
 	    return playerRepository.findAll();
 	}
+	
+	/**
+	 * Post Request
+	 * 
+	 	{
+		  findTeamByTeamId(teamId: "1") {
+		    id
+		    name
+		    players {
+		      id
+		      name
+		      age
+		    }
+		  }
+		}
+	 */
+	public Team findTeamByTeamId(String teamId) {
+		return teamRepository.findOne(teamId);
+	}
 }
